@@ -50,10 +50,3 @@
 2. 可 ** 新增 / 修改 / 刪除 ** 財產資訊
 3. 可 ** 修改分類 ** ，為財產設定分類
 
-## **7. API需求**
-| API | Method | 參數 | 回傳值 |
-|-----|--------|------|--------|
-| `/getAssetInfo` | GET | `assetId` | `{ assetId, assetName, user, location, status, category }` |
-| `/updateAssetInfo` | POST | `assetId, assetName, user, location, status, category` | `{ message: \"更新成功\" }` |
-| `/getNextAssetId` | GET | 無 | `{ nextAssetId: \"ASSET0005\" }` |
-| `/auth/google` | POST | `idToken` | `{ success: true, userEmail }` |
