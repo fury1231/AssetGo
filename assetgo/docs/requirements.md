@@ -1,6 +1,6 @@
 # ASSET-GO! 財產管理系統 - 需求文件
 
-## **1. 目標 **
+## **1. 目標**
 系統旨在提供無伺服器的財產解決方案
 透過 **Vue.js 前端** + **Google Apps Script 後端API**，讓使用者能夠：
 - 透過 Google Sheets 儲存財產資訊
