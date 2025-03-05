@@ -1,3 +1,4 @@
+// 試算表ID
 const SPREADSHEET_ID = "1ZIaMVx9P8i0VVFq6WhGjsZodzmkvHg0wGsKBge6jPS8";
 const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName("data");
 // GET API
@@ -108,6 +109,8 @@ function doPost(e) {
       return addAsset(requestData);
     case "PATCH": 
       return updateAsset(requestData);
+    case "DELETE":
+      return deleteAsset(requestData);
     default: {
       return ContentService.createTextOutput(JSON.stringify({
         error: true,
@@ -170,7 +173,7 @@ function generateNextAssetId(sheetData) {
 }
 
 
-
+// 更新資產資訊
 function updateAsset(e) {
 
   var data = sheet.getDataRange().getValues();
@@ -214,7 +217,44 @@ function updateAsset(e) {
   })).setMimeType(ContentService.MimeType.JSON);
 }
 
+// 刪除資產
+function deleteAsset(e) {
+  var data = sheet.getDataRange().getValues();
 
+  var assetId = e && e.assetId;
+
+  if(!e || !assetId) {
+    return ContentService.createTextOutput(JSON.stringify({
+      error: true,
+      message: "請提供asset ID"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var targetRow = -1;
+
+  // **查找资产编号**
+  for (var i = 1; i < data.length; i++) { // 跳过标题行
+    if (data[i][0] === assetId) {
+      targetRow = i + 1; // **转换为 Google Sheets 的行号**
+      break;
+    }
+  }
+
+  if (targetRow === -1) {
+    return ContentService.createTextOutput(JSON.stringify({
+      error: true,
+      message: "找不到該資產: " + assetId
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // **删除整行**
+  sheet.deleteRow(targetRow);
+
+  return ContentService.createTextOutput(JSON.stringify({
+    success: true,
+    message: "資產 " + assetId + " 已刪除"
+  })).setMimeType(ContentService.MimeType.JSON);
+}
 
 
 
