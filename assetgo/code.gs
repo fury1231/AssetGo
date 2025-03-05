@@ -191,14 +191,14 @@ function updateAsset(e) {
 
   for(var i = 1; i < data.length ; i++) {
     if(assetId === data[i][0]) {
-      sheet.getRange(i + 1, 2).setValue(e.assetName || data[i][1]); // 更新名称
-      sheet.getRange(i + 1, 3).setValue(e.category || data[i][2]); // 更新类别
+      sheet.getRange(i + 1, 2).setValue(e.assetName || data[i][1]); // 更新名稱
+      sheet.getRange(i + 1, 3).setValue(e.category || data[i][2]); // 更新分類
       sheet.getRange(i + 1, 4).setValue(e.user || data[i][3]); // 更新使用者
       sheet.getRange(i + 1, 5).setValue(e.location || data[i][4]); // 更新位置
-      sheet.getRange(i + 1, 6).setValue(e.status || data[i][5]); // 更新状态
-      sheet.getRange(i + 1, 7).setValue(e.memo || data[i][6]); // 更新备注
-      sheet.getRange(i + 1, 8).setValue(e.barcode || data[i][7]); // 更新条码
-      sheet.getRange(i + 1, 9).setValue(new Date()); // 更新变更时间
+      sheet.getRange(i + 1, 6).setValue(e.status || data[i][5]); // 更新狀態
+      sheet.getRange(i + 1, 7).setValue(e.memo || data[i][6]); // 更新備註
+      sheet.getRange(i + 1, 8).setValue(e.barcode || data[i][7]); // 更新條碼
+      sheet.getRange(i + 1, 9).setValue(new Date()); // 更新變更時間
       updated = true;
       break;
     }
@@ -232,10 +232,10 @@ function deleteAsset(e) {
 
   var targetRow = -1;
 
-  // **查找资产编号**
-  for (var i = 1; i < data.length; i++) { // 跳过标题行
+  // **查找資產編號**
+  for (var i = 1; i < data.length; i++) { // 跳過標題
     if (data[i][0] === assetId) {
-      targetRow = i + 1; // **转换为 Google Sheets 的行号**
+      targetRow = i + 1; // **轉換成Google Sheet 行號**
       break;
     }
   }
